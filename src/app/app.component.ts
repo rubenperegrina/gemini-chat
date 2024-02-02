@@ -20,6 +20,7 @@ export class AppComponent {
 
   geminiService = inject(GeminiService);
 
+  isLoading = false;
   messages: any[] = [
     {
       text: 'Hi! I\'m Gemini, Angular and TypeScript expert, how can i help you?',
@@ -33,6 +34,7 @@ export class AppComponent {
   ];
 
   async sendMessage(event: any) {
+    this.isLoading = true;
     this.messages.push({
       text: event.message,
       date: new Date(),
@@ -52,6 +54,8 @@ export class AppComponent {
         name: 'Gemini',
         avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
       },
-    },);
+    },
+    );
+    this.isLoading = false;
   }
 }
