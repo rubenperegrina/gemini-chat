@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NbChatModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { NbChatModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
     NbChatModule,
     NbLayoutModule
   ],
-  providers: [],
+  providers: [provideAnimations()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
