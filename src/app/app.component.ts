@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { GeminiService } from './services/gemini.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
   styles: [
     `
       ::ng-deep nb-layout-column {
@@ -17,9 +17,12 @@ import { Component } from '@angular/core';
   ],
 })
 export class AppComponent {
+
+  geminiService = inject(GeminiService);
+
   messages: any[] = [
     {
-      text: 'Hi! I\'m Gemini, how can i do for you?',
+      text: 'Hi! I\'m Gemini, Angular and TypeScript expert, how can i help you?',
       date: new Date(),
       reply: false,
       user: {
@@ -29,29 +32,26 @@ export class AppComponent {
     },
   ];
 
-  sendMessage(event: any) {
-    const files = !event.files ? [] : event.files.map((file: { src: any; type: any; }) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
-
+  async sendMessage(event: any) {
     this.messages.push({
       text: event.message,
       date: new Date(),
       reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
+      type: 'text',
       user: {
-        name: 'Jonh Doe',
+        name: 'Rubén Peregrina',
         avatar: 'https://cdn-icons-png.flaticon.com/512/5556/5556468.png',
       },
     });
-    // const botReply = this.chatShowcaseService.reply(event.message);
-    // if (botReply) {
-    //   setTimeout(() => { this.messages.push(botReply) }, 500);
-    // }
+    const botReply = await this.geminiService.generate(event.message);
+    this.messages.push(    {
+      text: botReply,
+      date: new Date(),
+      reply: false,
+      user: {
+        name: 'Gemini',
+        avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
+      },
+    },);
   }
 }

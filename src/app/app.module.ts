@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NbChatModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -12,7 +11,6 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NbThemeModule.forRoot(),
     NbChatModule,
     NbLayoutModule

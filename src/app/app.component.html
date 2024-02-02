@@ -1,20 +1,17 @@
 <nb-layout>
   <nb-layout-column>
-    <nb-chat title="Gemini chat" size="medium">
-      <nb-chat-message
-        *ngFor="let msg of messages"
+    <nb-chat title="Gemini chat" [status]="'success'" size="large">
+      @for( msg of messages; track msg.id){
+        <nb-chat-message
         [type]="msg.type"
         [message]="msg.text"
         [reply]="msg.reply"
         [sender]="msg.user.name"
         [date]="msg.date"
-        [files]="msg.files"
-        [quote]="msg.quote"
-        [latitude]="msg.latitude"
-        [longitude]="msg.longitude"
         [avatar]="msg.user.avatar"
       >
-      </nb-chat-message>
+    </nb-chat-message>
+    }
       <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true"> </nb-chat-form>
     </nb-chat>
   </nb-layout-column>
