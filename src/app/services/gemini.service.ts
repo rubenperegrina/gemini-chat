@@ -7,19 +7,14 @@ import { environment } from '../../environments/environment';
 })
 export class GeminiService {
 
-  prompt = 'You are an Angular and TypeScript expert, answer the questions providing the best examples including code'
+  prompt = 'You are an Angular and TypeScript expert, answer with maxim 50 words'
   generativeAI = new GoogleGenerativeAI(environment.gemini_key);
   model = this.generativeAI.getGenerativeModel({ model: 'gemini-pro' });
 
   async generate(textInput: string) {
     try {
       if (textInput) {
-        const parts = [
-          {
-            text: this.prompt,
-          },
-          { text: textInput }
-        ];
+        const parts = [{text: this.prompt,},{ text: textInput }];
 
         const modelResult = await this.model.generateContent({
           contents: [{ role: 'user', parts }],
@@ -29,9 +24,9 @@ export class GeminiService {
         return text;
       }
     } catch (e: any) {
-      return '';
+      return 'An error has ocurred';
     }
-    return '';
+    return 'Ann error has ocurred';
   }
 
 }

@@ -10,8 +10,9 @@ import { GeminiService } from './services/gemini.service';
         justify-content: center;
         display: flex;
       }
-      nb-chat {
-        width: 500px;
+      nb-card {
+        background-color: unset;
+        border: unset;
       }
     `,
   ],
@@ -45,7 +46,9 @@ export class AppComponent {
         avatar: 'https://cdn-icons-png.flaticon.com/512/5556/5556468.png',
       },
     });
+
     const botReply = await this.geminiService.generate(event.message);
+    
     this.messages.push(    {
       text: botReply,
       date: new Date(),
